@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ question_title }}</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: "Poppins", Arial, sans-serif;
+      line-height: 1.8;
+      margin: 20px;
+      padding: 0;
+      background-color: #0d1117;
+      color: #c9d1d9;
+      transition: background-color 0.5s ease, color 0.5s ease;
+    }
+
+    .light-mode {
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    .question-container {
+      background-color: #161b22;
+      border-radius: 12px;
+      padding: 40px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+      transition: background-color 0.5s ease, box-shadow 0.5s ease;
+      position: relative;
+    }
+
+    .light-mode .question-container {
+      background-color: #ffffff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      font-weight: bold;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      font-size: 24px;
+      color: #6a5acd;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: rotate(360deg);
+    }
+
+    .light-mode .theme-toggle {
+      color: #007bff;
+    }
+
+    p, ul, ol {
+      margin: 15px 0;
+      font-size: 1.1rem;
+    }
+
+    li {
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    a {
+      color: #9b7af4;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    hr {
+      border: 1px solid #9b7af4;
+      margin: 20px 0;
+    }
+
+    .light-mode hr {
+      border-color: #007bff;
+    }
+
+    blockquote {
+      margin: 20px 0;
+      padding: 15px;
+      background-color: #2c2f36;
+      border-left: 5px solid #9b7af4;
+      font-style: italic;
+    }
+
+    .light-mode blockquote {
+      background-color: #e8f5e9;
+      border-left: 5px solid #2e7d32;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 15px 0;
+      transition: transform 0.3s ease, filter 0.5s ease;
+    }
+
+    img:hover {
+      transform: scale(1.05);
+    }
+
+    .example-block {
+      background-color: #1f232a; /* Dark mode background */
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+      border: 2px solid #9b7af4; /* Add a clear and visible border */
+      transition: background-color 0.5s ease, border-color 0.5s ease;
+    }
+
+    .light-mode .example-block {
+      background-color: #f7f9fc; /* Light mode background */
+      border: 2px solid #007bff; /* Blue border for light mode */
+    }
+
+    pre, code {
+      background-color: #2d2d2d; /* Consistent dark mode background for code */
+      color: #d3c8da; /* Red-based color for code text */
+      padding: 5px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+
+    .example-block pre, .example-block code {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      margin: 10px 0;
+      border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle inner border */
+    }
+
+    .light-mode pre, .light-mode code {
+      background-color: #f4f4f4;
+      color: #222;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 5px 15px;
+      margin: 10px 5px 0;
+      background-color: #4b0082;
+      color: white;
+      border-radius: 20px;
+      font-size: 14px;
+    }
+
+    .light-mode .tag {
+      background-color: #007bff;
+    }
+
+    .difficulty {
+      color: white;
+      padding: 6px 15px;
+      border-radius: 15px;
+      font-size: 14px;
+      display: inline-block;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .easy {
+      background-color: #28a745;
+    }
+
+    .medium {
+      background-color: #ffc107;
+    }
+
+    .hard {
+      background-color: #dc3545;
+    }
+
+    .flex-image-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .question-image {
+      max-width: 60%;
+      margin: auto;
+      border-radius: 10px;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .question-image:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="question-container">
+    <span class="difficulty {{ difficulty | lower }}">{{ difficulty }}</span>
+    <h1>
+      {{ question_id }}. {{ question_title }}
+      <span class="theme-toggle" onclick="toggleDarkMode()">
+        <i class="fas fa-moon"></i>
+      </span>
+    </h1>
+    <hr />
+    <div>
+      <!-- Render HTML content safely -->
+      {{ question | safe }}
+    </div>
+    <div class="flex-image-container">
+      {% if image_url %}
+        <img src="{{ image_url }}" alt="Binary Tree" class="question-image">
+      {% endif %}
+    </div>
+    <hr />
+    <div>
+      {% for tag in topic_tags %}
+        <span class="tag">{{ tag.name }}</span>
+      {% endfor %}
+    </div>
+  </div>
+
+  <script>
+    // Apply saved theme from localStorage
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    const body = document.body;
+    const themeToggleIcon = document.querySelector('.theme-toggle i');
+
+    if (savedTheme === 'light') {
+      body.classList.add('light-mode');
+      themeToggleIcon.classList.replace('fa-moon', 'fa-sun');
+    }
+
+    function toggleDarkMode() {
+      const isLightMode = body.classList.toggle('light-mode');
+      const iconClass = isLightMode ? 'fa-sun' : 'fa-moon';
+      themeToggleIcon.classList.replace(isLightMode ? 'fa-moon' : 'fa-sun', iconClass);
+      localStorage.setItem('theme', isLightMode ? 'light' : 'dark');
+    }
+  </script>
+</body>
+
+</html>

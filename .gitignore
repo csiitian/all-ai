@@ -1,2 +1,81 @@
-.env
-/venv
+# Python-related files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environment
+venv/
+.env/
+*.env
+
+# Flask instance folder
+instance/
+*.db
+*.sqlite3
+
+# OpenAI API key files (sensitive info)
+openai_key.txt
+config.yaml
+
+# Logs and cache
+*.log
+logs/
+*.out
+*.err
+*.pid
+*.bak
+debug.log
+*.swp
+
+# Flask cache and compiled files
+cache/
+*.cache
+*.egg-info/
+*.egg
+*.manifest
+pip-log.txt
+
+# Static and media files (if generated during runtime)
+media/
+static/tmp/
+
+# IDE-specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Node modules (if you're using frontend dependencies)
+node_modules/
+
+# Ignore coverage and test result reports
+htmlcov/
+.coverage
+*.cover
+coverage.xml
+pytest_cache/
+*.pytest_cache/
+
+# Compiled assets (optional)
+dist/
+build/
+
+# Temporary files
+*.tmp
+*.bak
+*.old
+*.swp
+*.~lock.*
+
+# Docker files
+docker-compose.override.yml
+.dockerignore
